@@ -2,10 +2,10 @@
 project_type = :stand_alone
 
 # Publishing paths
-http_path = "/"
-http_images_path = "/images"
-http_fonts_path = "/fonts"
-css_dir = "public/stylesheets"
+http_path = "/node-coffee-heroku-tutorial/"
+http_images_path = "/node-coffee-heroku-tutorial/images"
+http_fonts_path = "/node-coffee-heroku-tutorial/fonts"
+css_dir = "public/node-coffee-heroku-tutorial/stylesheets"
 
 # Local development paths
 sass_dir = "sass"
