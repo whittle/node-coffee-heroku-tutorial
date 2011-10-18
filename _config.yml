@@ -3,15 +3,15 @@
 # ----------------------- #
 
 url: http://whittle.github.com/node-coffee-heroku-tutorial
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: Node && CoffeeScript && Heroku
+subtitle: A Tutorial
+author: Jason Whittle
 simple_search: http://google.com/search
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
 # http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
-date_format: "ordinal"
+date_format: "%e %b %Y"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /node-coffee-heroku-tutorial/atom.xml
@@ -92,6 +92,6 @@ disqus_show_comment_count: false
 
 # Google Analytics
 google_analytics_tracking_id:
-   
+
 # Facebook Like
-facebook_like: true   
+facebook_like: true
