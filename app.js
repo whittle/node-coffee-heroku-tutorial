@@ -2,7 +2,7 @@
   var http = require('http');
 
   var say_nothing = function(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.setHeader('Content-Type', 'text/plain');
     response.end();
   };
 
