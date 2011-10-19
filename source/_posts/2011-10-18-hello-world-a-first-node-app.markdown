@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hello to you: a first node app"
+title: "Hello world: a first node app"
 date: 2011-10-18 15:02
 comments: true
 categories: [node, javascript]
@@ -22,8 +22,8 @@ Once we have that local scope create, we can start adding things to it:
 
 {% gist_it 453f1645b44c652811d13c0b1a196a1c7b72f7a6 app.js %}
 
-The `require()` function we’re using here is [built into
-Node.js](http://nodejs.org/docs/v0.4.12/api/all.html#require),
+The `require()` function we’re using here is
+[built into Node.js](http://nodejs.org/docs/v0.4.12/api/all.html#require),
 although it isn’t a Node.js-specific invention. The `require()`
 function is authoritatively described by
 [CommonJS’s](http://www.commonjs.org/) [Modules
@@ -36,9 +36,9 @@ The reason we need the `http` module is so that we can do this:
 
 {% gist_it 013450c96caabba3abeafdbccd75ec9b85ea91eb app.js %}
 
-The object exported by the [`http`
-module](http://nodejs.org/docs/v0.4.12/api/all.html#hTTP) has a method
-called `createServer`, which creates an
+The object exported by the
+[`http` module](http://nodejs.org/docs/v0.4.12/api/all.html#hTTP)
+has a method called `createServer`, which creates an
 [`http.Server`](http://nodejs.org/docs/v0.4.12/api/all.html#http.Server),
 of all things. We’re going to cleverly call the server that we just
 summoned into existence `app`, despite this not being much of an app
@@ -50,9 +50,9 @@ editor, good job! I like the cut of your jib. If you haven’t, go ahead
 and do it now. I’m going to assume that you’re using a file named
 `app.js` for right now, just like I am.
 
-Also, if you haven’t already installed Node, there are [plenty of ways
-to do it](https://github.com/joyent/node/wiki/Installation), although
-if you’re on a Mac, I would suggest
+Also, if you haven’t already installed Node, there are
+[plenty of ways to do it](https://github.com/joyent/node/wiki/Installation),
+although if you’re on a Mac, I would suggest
 [Homebrew](https://github.com/mxcl/homebrew).
 
 Once you have Node installed on your machine, you can start your app
@@ -82,8 +82,8 @@ returns anything. So what we’ve created is exactly what it seems to
 be: a server that listens, but never says anything back. Let’s dig
 into that.
 
-If you look at the [API for
-`http.createServer()`](http://nodejs.org/docs/v0.4.12/api/all.html#http.createServer)
+If you look at the
+[API for the `http.createServer()`](http://nodejs.org/docs/v0.4.12/api/all.html#http.createServer)
 call we’re making, you’ll see that we can pass it a `requestListener`,
 which is “a function which is automatically added to the 'request'
 event.” That sounds just like what we’re looking for:
@@ -119,7 +119,7 @@ traditionalist and so we’re going to continue in the direction of
 The HTTP server that Node provides us with is intentionally low-level
 and depends on us to fill in all of the details. Later on, we’ll find
 ways to encapsulate this low-level behavior in a declarative,
-functional matter, but for right now, we’re going to have to do things
+functional matter, but for right now we’re going to have to do things
 like set the response headers ourselves.
 
 When I run this little non-app, the headers I see on the empty
@@ -129,7 +129,31 @@ response are:
     Connection: keep-alive
     Transfer-Encoding: chunked
 
-The next crucial header we’re going to need to get our hello through
-properly is the content-type:
+(You can see the headers too, if you use Chrome’s
+[Developer Tools](http://code.google.com/chrome/devtools/docs/overview.html)
+or [Firebug](http://getfirebug.com/) for Firefox.)
 
-{% gist_it 956b4d1bc98f9d60fbb3cfc732ba46ea8cb1ceca app.js %}
+The next crucial header we’re going to need to get our hello through
+properly is the content type:
+
+{% gist_it 93ffcbff2abaa009fa281a02e0e18668d79e8537 app.js %}
+
+According to
+[RFC 2616 §14.17](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html),
+the Content-Type header “indicates the media type of the entity-body
+sent to the recipient,” or in this case just lets the browser know
+that we’re sending it plaintext. If you inspect the (still empty)
+response that you get from your node server now, you’ll see headers
+like:
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain
+    Connection: keep-alive
+    Transfer-Encoding: chunked
+
+Now that we let the browser know what we’re sending, we’re ready to
+send that famous first message:
+
+{% gist_it 7d114ab216c9223d92e1afe6a93d4578a0b23c9d app.js %}
+
+Fire up your node server and [check it out](http://localhost:3080)!
