@@ -35,8 +35,31 @@ However, if we include anything besides the first 128 characters of the Unicode
 character set, `message.length()` will no longer give us the correct
 result:
 
-{% gist_it eb587185509ec8c2e728067d49f4ac2d5a67ec09 app.js %}
+{% gist 1299915 app.js %}
 
 Here, the usual English message has been switched with its
 [Arabic equivalent](http://www.howtosayin.com/say/arabic/hello+world.html),
-which has 12 characters that occupy 23 bytes on the wire.
+which has 12 characters that occupy 23 bytes on the wire, and the
+headers bear that out:
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain; charset=utf-8
+    X-Bad-Content-Length: 12
+    Content-Length: 23
+    Connection: keep-alive
+
+Something important to note is the order that we’re calling methods on the
+[`http.ServerResponse`](http://nodejs.org/docs/v0.4.12/api/http.html#http.ServerResponse).
+It is critical that all the headers have been set on the response
+before ever calling
+[`write()`](http://nodejs.org/docs/v0.4.12/api/http.html#response.write),
+because `write()` flushes the headers. Similarly,
+[`end()`](http://nodejs.org/docs/v0.4.12/api/http.html#response.end)
+signals that the headers and body are complete as is.
+
+Constructing the response out-of-order is instructive, in that it
+produces a number of distinct failure modes:
+
+* Placing a `setHeader()` after a `write()` produces an exception with the message “Can't set headers after they are sent.”
+* Placing a `write()` after the `end()` without a content-length header or with a content-length header that only accounts for the content written prior the the `end()` just nevers sends any content written after the `end()`.
+* Placing a `write()` after the `end()` with a content-length header that accounts for the content written after the `end()` will hang most clients as they wait the server to send that last part, although it never does.
