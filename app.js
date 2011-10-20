@@ -4,8 +4,9 @@
   var say_hello = function(request, response) {
     var message = 'Hello, world!';
 
-    response.setHeader('Content-Type', 'text/plain');
-    response.write(message);
+    response.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
+    response.write(message, 'utf8');
     response.end();
   };
 
