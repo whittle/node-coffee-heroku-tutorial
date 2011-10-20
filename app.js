@@ -2,7 +2,7 @@
   var http = require('http');
 
   var say_hello = function(request, response) {
-    var message = 'Hello, world!';
+    var message = 'مرحبا العالم';
 
     response.setHeader('Content-Type', 'text/plain; charset=utf-8');
     response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
