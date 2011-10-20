@@ -6,6 +6,7 @@
 
     response.setHeader('Content-Type', 'text/plain; charset=utf-8');
     response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
+    response.setHeader('X-Content-Character-Count', message.length);
     response.write(message, 'utf8');
     response.end();
   };
