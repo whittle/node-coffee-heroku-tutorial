@@ -154,6 +154,6 @@ like:
 Now that we let the browser know what we’re sending, we’re ready to
 send that famous first message:
 
-{% gist_it 7d114ab216c9223d92e1afe6a93d4578a0b23c9d app.js %}
+{% gist_it 7bab5c62f53857fbfd6487e77eaaaf906c7c04e0 app.js %}
 
 Fire up your node server and [check it out](http://localhost:3080)!
