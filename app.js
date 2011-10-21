@@ -1,16 +1,15 @@
 (function() {
   var http = require('http');
 
-  var say_hello = function(request, response) {
-    var message = 'مرحبا العالم';
+  var sayHello = function(request, response) {
+    var message = 'Hello, world!';
 
-    response.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
-    response.setHeader('X-Content-Character-Count', message.length);
-    response.write(message, 'utf8');
-    response.end();
+    response.writeHead(200, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Content-Length': Buffer.byteLength(message, 'utf8')});
+    response.end(message, 'utf8');
   };
 
-  var app = http.createServer(say_hello);
+  var app = http.createServer(sayHello);
   app.listen(3080);
 })();
