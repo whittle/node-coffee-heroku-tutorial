@@ -1,5 +1,5 @@
-# var http = require('http');
-#
+http = require 'http'
+
 # var sayHello = function(request, response) {
 #   var message = 'Hello, world!';
 #
