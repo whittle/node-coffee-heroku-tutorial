@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Node && CoffeeScript && Heroku</title>
+  <title>Headers and encodings: being a good web citizen - Node && CoffeeScript && Heroku</title>
   <meta name="author" content="Jason Whittle">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://whittle.github.com/node-coffee-heroku-tutorial/">
+  <link rel="canonical" href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/">
   <link href="/node-coffee-heroku-tutorial/favicon.png" rel="icon">
   <link href="/node-coffee-heroku-tutorial/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/node-coffee-heroku-tutorial/javascripts/modernizr-2.0.js"></script>
@@ -60,15 +60,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/">Headers and Encodings: Being a Good Web Citizen</a></h1>
+      <h1 class="entry-title">Headers and Encodings: Being a Good Web Citizen</h1>
     
     
       <p class="meta">
@@ -86,7 +83,7 @@
   </header>
 
 
-  <div class="entry-content"><p>So, in the last post we sent our very first message, but we’re not
+<div class="entry-content"><p>So, in the last post we sent our very first message, but we’re not
 quite doing everything we should.</p>
 
 <p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616 §14.13</a>,
@@ -252,276 +249,58 @@ as a last (and in this case only) <code>write()</code>.</p>
 <p>All told, this only saves us two method calls, but if every time you
 refactor it nets huge gains, maybe you don’t do it enough.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/">Hello World: A First Node App</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jason Whittle</span></span>
+
+      
 
 
 
 
   
 
-<time datetime="2011-10-18T15:02:00-04:00" pubdate>18 Oct 2011</time>
-        
-      </p>
+<time datetime="2011-10-19T16:00:00-04:00" pubdate>19 Oct 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/node-coffee-heroku-tutorial/blog/categories/javascript/'>javascript</a>, <a class='category' href='/node-coffee-heroku-tutorial/blog/categories/node/'>node</a>, <a class='category' href='/node-coffee-heroku-tutorial/blog/categories/utf8/'>utf8</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>As is traditional, we’re going to get started with a hello world app,
-and we’re going to take it step-by-step.</p>
-
-<p>First, we create a no-op node app. (No-op, noop, and nop are short for
-no operation, which is an assembly-ish way of saying that this app
-doesn’t do anything.) The initial version of that file is:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/db26a14ea44241edccb3f46e08e2a2a7a39600e9/app.js'></script>
-<noscript><pre><code>(function() {
-})();
-</code></pre></noscript></div>
-
-
-<p>What you see here is a common construction for executing code without
-adding its constituent pieces to the global environment.</p>
-
-<p>Once we have that local scope create, we can start adding things to it:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/453f1645b44c652811d13c0b1a196a1c7b72f7a6/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-})();
-</code></pre></noscript></div>
-
-
-<p>The <code>require()</code> function we’re using here is
-<a href="http://nodejs.org/docs/v0.4.12/api/all.html#require">built into Node.js</a>,
-although it isn’t a Node.js-specific invention. The <code>require()</code>
-function is authoritatively described by
-<a href="http://www.commonjs.org/">CommonJS’s</a> <a href="http://www.commonjs.org/specs/modules/1.0/">Modules
-spec</a>, but the kernel of
-it is: it takes a module identifier (e.g. <code>'http'</code>) and returns
-everything the named module has exported (in this case, an object that
-we’re storing into the <code>http</code> variable).</p>
-
-<p>The reason we need the <code>http</code> module is so that we can do this:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/013450c96caabba3abeafdbccd75ec9b85ea91eb/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-
-  var app = http.createServer();
-})();
-</code></pre></noscript></div>
-
-
-<p>The object exported by the
-<a href="http://nodejs.org/docs/v0.4.12/api/all.html#hTTP"><code>http</code> module</a>
-has a method called <code>createServer</code>, which creates an
-<a href="http://nodejs.org/docs/v0.4.12/api/all.html#http.Server"><code>http.Server</code></a>,
-of all things. We’re going to cleverly call the server that we just
-summoned into existence <code>app</code>, despite this not being much of an app
-yet.</p>
-
-<p>All of the source we’ve looked at so far has been executable. If
-you’ve been following along and typing it into your favorite text
-editor, good job! I like the cut of your jib. If you haven’t, go ahead
-and do it now. I’m going to assume that you’re using a file named
-<code>app.js</code> for right now, just like I am.</p>
-
-<p>Also, if you haven’t already installed Node, there are
-<a href="https://github.com/joyent/node/wiki/Installation">plenty of ways to do it</a>,
-although if you’re on a Mac, I would suggest
-<a href="https://github.com/mxcl/homebrew">Homebrew</a>.</p>
-
-<p>Once you have Node installed on your machine, you can start your app
-from the directory you’re working in at any time by running <code>node
-app.js</code>. When you try it with any of the previous files we’ve written
-so far, however, nothing seems to happen. Node barely stops to think
-before it returns you back to the console again. Where’s the server we
-created?</p>
-
-<p>The answer is that we created a server, but we didn’t tell it to do
-anything; not even that we wanted it to accept connections. Let’s try
-telling it just that:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/55e7733b635d0fd04addfd6ad292f5f12043c6b9/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-
-  var app = http.createServer();
-  app.listen(3080);
-})();
-</code></pre></noscript></div>
-
-
-<p>Here we’ve instructed the server we created to listen on port 3080 of
-the machine that server is being run on. If you run <code>node app.js</code> now,
-you’ll notice that instead of very quickly completing, now it seems to
-do nothing but very slowly. In fact, it never returns at all, just
-sitting there until you kill it (control-C in most Unix shells,
-including the default shell on Macs).</p>
-
-<p>The other thing you might notice about your new server is that, while
-it’s running, your browser can try to connect to the sever at
-<a href="http://localhost:3080">http://localhost:3080</a> but it also never
-returns anything. So what we’ve created is exactly what it seems to
-be: a server that listens, but never says anything back. Let’s dig
-into that.</p>
-
-<p>If you look at the
-<a href="http://nodejs.org/docs/v0.4.12/api/all.html#http.createServer">API for the <code>http.createServer()</code></a>
-call we’re making, you’ll see that we can pass it a <code>requestListener</code>,
-which is “a function which is automatically added to the &#8216;request&#8217;
-event.” That sounds just like what we’re looking for:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/dc8ad3b70bc79cd3b046f3aac7530907fbe661c1/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-
-  var say_nothing = function() {};
-
-  var app = http.createServer(say_nothing);
-  app.listen(3080);
-})();
-</code></pre></noscript></div>
-
-
-<p>If you run this version of app.js, you’ll find that the behavior of
-our server hasn’t changed at all: it still never returns
-anything. Digging into the Node API again, we see that the signature
-of <code>http.Server</code>’s <code>request</code> event (which you’ll recall is the event
-to which <code>createServer</code> attaches the function you give it) is
-<code>function (request, response) { }</code>.</p>
-
-<p>A little more digging in
-<a href="http://nodejs.org/docs/v0.4.12/api/all.html#http.ServerResponse"><code>http.ServerResponse</code></a>
-nets us this gem: “The method, <code>response.end()</code>, MUST be called on
-each response.” Let’s put this to work for us by changing
-<code>say_nothing()</code>’s parameters to match <code>http.Server</code>’s <code>request</code> event
-and calling <code>end()</code> on the <code>ServerResponse</code> we just exposed:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/cc5158d5dbede2d368a043dbb5fd7616d7206cfd/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-
-  var say_nothing = function(request, response) {
-    response.end();
-  };
-
-  var app = http.createServer(say_nothing);
-  app.listen(3080);
-})();
-</code></pre></noscript></div>
-
-
-<p>Once you have this app running, you can finally connect to it with
-your web browser at
-<a href="http://localhost:3080">http://localhost:3080</a>. The server returns a
-blank page, but at least it doesn’t just spin forever.</p>
-
-<p>What can we do from here? Anything we want, really: we now have a
-working web server. But, as I mentioned in the beginning, I’m a
-traditionalist and so we’re going to continue in the direction of
-“Hello, world!”</p>
-
-<p>The HTTP server that Node provides us with is intentionally low-level
-and depends on us to fill in all of the details. Later on, we’ll find
-ways to encapsulate this low-level behavior in a declarative,
-functional matter, but for right now we’re going to have to do things
-like set the response headers ourselves.</p>
-
-<p>When I run this little non-app, the headers I see on the empty
-response are:</p>
-
-<pre><code>HTTP/1.1 200 OK
-Connection: keep-alive
-Transfer-Encoding: chunked
-</code></pre>
-
-<p>(You can see the headers too, if you use Chrome’s
-<a href="http://code.google.com/chrome/devtools/docs/overview.html">Developer Tools</a>
-or <a href="http://getfirebug.com/">Firebug</a> for Firefox.)</p>
-
-<p>The next crucial header we’re going to need to get our hello through
-properly is the content type:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/93ffcbff2abaa009fa281a02e0e18668d79e8537/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-
-  var say_nothing = function(request, response) {
-    response.setHeader('Content-Type', 'text/plain');
-    response.end();
-  };
-
-  var app = http.createServer(say_nothing);
-  app.listen(3080);
-})();
-</code></pre></noscript></div>
-
-
-<p>According to
-<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616 §14.17</a>,
-the Content-Type header “indicates the media type of the entity-body
-sent to the recipient,” or in this case just lets the browser know
-that we’re sending it plaintext. If you inspect the (still empty)
-response that you get from your node server now, you’ll see headers
-like:</p>
-
-<pre><code>HTTP/1.1 200 OK
-Content-Type: text/plain
-Connection: keep-alive
-Transfer-Encoding: chunked
-</code></pre>
-
-<p>Now that we let the browser know what we’re sending, we’re ready to
-send that famous first message:</p>
-
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/7bab5c62f53857fbfd6487e77eaaaf906c7c04e0/app.js'></script>
-<noscript><pre><code>(function() {
-  var http = require('http');
-
-  var say_hello = function(request, response) {
-    var message = 'Hello, world!';
-
-    response.setHeader('Content-Type', 'text/plain');
-    response.write(message);
-    response.end();
-  };
-
-  var app = http.createServer(say_hello);
-  app.listen(3080);
-})();
-</code></pre></noscript></div>
-
-
-<p>Fire up your node server and <a href="http://localhost:3080">check it out</a>!</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/" data-via="" data-counturl="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/" title="Previous Post: Hello world: a first node app">&laquo; Hello world: a first node app</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/node-coffee-heroku-tutorial/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -546,6 +325,7 @@ send that famous first message:</p>
 
   
 </aside>
+
 
     </div>
   </div>

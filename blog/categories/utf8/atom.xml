@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: utf8 | Node && CoffeeScript && Heroku]]></title>
+  <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/categories/utf8/atom.xml" rel="self"/>
+  <link href="http://whittle.github.com/node-coffee-heroku-tutorial/"/>
+  <updated>2011-10-20T23:36:15-04:00</updated>
+  <id>http://whittle.github.com/node-coffee-heroku-tutorial/</id>
+  <author>
+    <name><![CDATA[Jason Whittle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Headers and encodings: being a good web citizen]]></title>
+    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/"/>
+    <updated>2011-10-19T16:00:00-04:00</updated>
+    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen</id>
+    <content type="html"><![CDATA[<p>So, in the last post we sent our very first message, but we’re not
+quite doing everything we should.</p>
+
+<p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616 §14.13</a>,
+specifies that our server should be sending a <code>Content-Length</code> header
+with the size of the body in octects (8-bit bytes). Fortunately,
+Node can figure that out for us:</p>
+
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/8811e6c46aa910ad71420591548f1bb4aaa644eb/app.js'></script>
+<noscript><pre><code>(function() {
+  var http = require('http');
+
+  var say_hello = function(request, response) {
+    var message = 'Hello, world!';
+
+    response.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
+    response.write(message, 'utf8');
+    response.end();
+  };
+
+  var app = http.createServer(say_hello);
+  app.listen(3080);
+})();
+</code></pre></noscript></div>
+</p>
+
+<p>Here, we used
+<a href="http://nodejs.org/docs/v0.4.8/api/buffers.html#buffer.byteLength"><code>Buffer.byteLength()</code></a>
+to measure the number of bytes that are going to be sent. We also made
+it explicit that we wanted to do all of this in
+<a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a>, although both <code>write()</code>
+and <code>byteLength()</code> will default to UTF-8 if we specify nothing.</p>
+
+<p>Because all of the characters in our <code>message</code> are in the ASCII
+set—and can therefore be represented as single bytes in UTF-8—the
+result of <code>byteLength()</code> in this case is the same as the result would
+be for <code>message.length()</code>: 13. We can even prove this by including a
+non-standard HTTP header:</p>
+
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/4344892c97c1f4cea0a04e188ba71baf5916b631/app.js'></script>
+<noscript><pre><code>(function() {
+  var http = require('http');
+
+  var say_hello = function(request, response) {
+    var message = 'Hello, world!';
+
+    response.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
+    response.setHeader('X-Content-Character-Count', message.length);
+    response.write(message, 'utf8');
+    response.end();
+  };
+
+  var app = http.createServer(say_hello);
+  app.listen(3080);
+})();
+</code></pre></noscript></div>
+</p>
+
+<p>However, if we include anything besides the first 128 characters of the Unicode
+character set, <code>message.length()</code> will no longer give us the correct
+result:</p>
+
+<p><div><script src='https://gist.github.com/1299915.js?file=app.js'></script>
+<noscript><pre><code>(function() {
+  var http = require('http');
+
+  var say_hello = function(request, response) {
+    var message = 'مرحبا العالم';
+
+    response.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    response.setHeader('Content-Length', Buffer.byteLength(message, 'utf8'));
+    response.setHeader('X-Content-Character-Count', message.length);
+    response.write(message, 'utf8');
+    response.end();
+  };
+
+  var app = http.createServer(say_hello);
+  app.listen(3080);
+})();
+</code></pre></noscript></div>
+</p>
+
+<p>Here, the usual English message has been switched with its
+<a href="http://www.howtosayin.com/say/arabic/hello+world.html">Arabic equivalent</a>,
+which has 12 characters that occupy 23 bytes on the wire, and the
+headers bear that out:</p>
+
+<pre><code>HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+Content-Length: 23
+X-Content-Character-Count: 12
+Connection: keep-alive
+</code></pre>
+
+<p>Something important to note is the order that we’re calling methods on the
+<a href="http://nodejs.org/docs/v0.4.12/api/http.html#http.ServerResponse"><code>http.ServerResponse</code></a>.
+It is critical that all the headers have been set on the response
+before ever calling
+<a href="http://nodejs.org/docs/v0.4.12/api/http.html#response.write"><code>write()</code></a>,
+because <code>write()</code> flushes the headers. Similarly,
+<a href="http://nodejs.org/docs/v0.4.12/api/http.html#response.end"><code>end()</code></a>
+signals that the headers and body are complete as is.</p>
+
+<p>Constructing the response out-of-order is instructive, in that it
+produces a number of distinct failure modes:</p>
+
+<ul>
+<li><p>Placing a <code>setHeader()</code> after a <code>write()</code> produces an exception with
+the message “Can't set headers after they are sent.” If the
+exception is uncaught, it will crash the server.</p></li>
+<li><p>Placing a <code>write()</code> after the <code>end()</code> causes that <code>write()</code> to never
+get sent to the client.</p>
+
+<ul>
+<li>If the content-length header is too long for the actual content
+sent (i.e., the <code>write()</code>s prior to the <code>end()</code>), the client will
+stall as it waits for the server to send the missing bytes.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>As we wrap things up, let’s shorten our code a little bit.
+<a href="http://www.codinghorror.com/blog/2007/05/the-best-code-is-no-code-at-all.html">Much</a>
+has
+<a href="http://dev.af83.com/code-liability-not-asset-part-1-3/2010/02/24">been</a>
+<a href="http://www.infoq.com/news/2011/05/less-code-is-better">said</a> about
+keeping your code small, so I won’t harp on it:</p>
+
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/5a37ea31b0846e8ce72d853db43d2a38babb04e3/app.js'></script>
+<noscript><pre><code>(function() {
+  var http = require('http');
+
+  var sayHello = function(request, response) {
+    var message = 'Hello, world!';
+
+    response.writeHead(200, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Content-Length': Buffer.byteLength(message, 'utf8')});
+    response.end(message, 'utf8');
+  };
+
+  var app = http.createServer(sayHello);
+  app.listen(3080);
+})();
+</code></pre></noscript></div>
+</p>
+
+<p>What we’ve done here (besides going back to English and removing the
+non-standard character-count header) is to pack our remaining headers
+into an object and pass them all together to
+<a href="http://nodejs.org/docs/v0.4.12/api/http.html#response.writeHead"><code>ServerResponse.writeHead()</code></a>.
+<code>writeHead()</code> also requires an
+<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP status code</a>
+which should always be <code>200 OK</code> for now.</p>
+
+<p>Additionally, the documentation for
+<a href="http://nodejs.org/docs/v0.4.12/api/http.html#response.end"><code>end()</code></a>
+specifies that as well as finalizing our response, we can also use it
+as a last (and in this case only) <code>write()</code>.</p>
+
+<p>All told, this only saves us two method calls, but if every time you
+refactor it nets huge gains, maybe you don’t do it enough.</p>
+]]></content>
+  </entry>
+  
+</feed>

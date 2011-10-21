@@ -1,92 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Node && CoffeeScript && Heroku</title>
-  <meta name="author" content="Jason Whittle">
-
-  
-  <meta name="description" content="So, in the last post we sent our very first message, but we’re notquite doing everything we should.RFC 2616 §14.13,specifies that our server should...">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://whittle.github.com/node-coffee-heroku-tutorial/">
-  <link href="/node-coffee-heroku-tutorial/favicon.png" rel="icon">
-  <link href="/node-coffee-heroku-tutorial/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/node-coffee-heroku-tutorial/javascripts/modernizr-2.0.js"></script>
-  <script src="/node-coffee-heroku-tutorial/javascripts/ender.js"></script>
-  <script src="/node-coffee-heroku-tutorial/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/node-coffee-heroku-tutorial/atom.xml" rel="alternate" title="Node && CoffeeScript && Heroku" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/node-coffee-heroku-tutorial/">Node && CoffeeScript && Heroku</a></h1>
-  
-    <h2>A (Mildly Obsessive) Tutorial</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/node-coffee-heroku-tutorial/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:whittle.github.com/node-coffee-heroku-tutorial" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-<ul class="main-navigation">
-  <li><a href="/node-coffee-heroku-tutorial/">Blog</a></li>
-  <li><a href="/node-coffee-heroku-tutorial/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Category: javascript | Node && CoffeeScript && Heroku]]></title>
+  <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://whittle.github.com/node-coffee-heroku-tutorial/"/>
+  <updated>2011-10-20T23:36:15-04:00</updated>
+  <id>http://whittle.github.com/node-coffee-heroku-tutorial/</id>
+  <author>
+    <name><![CDATA[Jason Whittle]]></name>
     
-      <h1 class="entry-title"><a href="/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/">Headers and Encodings: Being a Good Web Citizen</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-<time datetime="2011-10-19T16:00:00-04:00" pubdate>19 Oct 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, in the last post we sent our very first message, but we’re not
+  <entry>
+    <title type="html"><![CDATA[Headers and encodings: being a good web citizen]]></title>
+    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/"/>
+    <updated>2011-10-19T16:00:00-04:00</updated>
+    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen</id>
+    <content type="html"><![CDATA[<p>So, in the last post we sent our very first message, but we’re not
 quite doing everything we should.</p>
 
 <p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616 §14.13</a>,
@@ -94,7 +26,7 @@ specifies that our server should be sending a <code>Content-Length</code> header
 with the size of the body in octects (8-bit bytes). Fortunately,
 Node can figure that out for us:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/8811e6c46aa910ad71420591548f1bb4aaa644eb/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/8811e6c46aa910ad71420591548f1bb4aaa644eb/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -111,7 +43,7 @@ Node can figure that out for us:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>Here, we used
 <a href="http://nodejs.org/docs/v0.4.8/api/buffers.html#buffer.byteLength"><code>Buffer.byteLength()</code></a>
@@ -126,7 +58,7 @@ result of <code>byteLength()</code> in this case is the same as the result would
 be for <code>message.length()</code>: 13. We can even prove this by including a
 non-standard HTTP header:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/4344892c97c1f4cea0a04e188ba71baf5916b631/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/4344892c97c1f4cea0a04e188ba71baf5916b631/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -144,13 +76,13 @@ non-standard HTTP header:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>However, if we include anything besides the first 128 characters of the Unicode
 character set, <code>message.length()</code> will no longer give us the correct
 result:</p>
 
-<div><script src='https://gist.github.com/1299915.js?file=app.js'></script>
+<p><div><script src='https://gist.github.com/1299915.js?file=app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -168,7 +100,7 @@ result:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>Here, the usual English message has been switched with its
 <a href="http://www.howtosayin.com/say/arabic/hello+world.html">Arabic equivalent</a>,
@@ -196,7 +128,7 @@ produces a number of distinct failure modes:</p>
 
 <ul>
 <li><p>Placing a <code>setHeader()</code> after a <code>write()</code> produces an exception with
-the message “Can&#8217;t set headers after they are sent.” If the
+the message “Can't set headers after they are sent.” If the
 exception is uncaught, it will crash the server.</p></li>
 <li><p>Placing a <code>write()</code> after the <code>end()</code> causes that <code>write()</code> to never
 get sent to the client.</p>
@@ -217,7 +149,7 @@ has
 <a href="http://www.infoq.com/news/2011/05/less-code-is-better">said</a> about
 keeping your code small, so I won’t harp on it:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/5a37ea31b0846e8ce72d853db43d2a38babb04e3/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/5a37ea31b0846e8ce72d853db43d2a38babb04e3/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -234,7 +166,7 @@ keeping your code small, so I won’t harp on it:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>What we’ve done here (besides going back to English and removing the
 non-standard character-count header) is to pack our remaining headers
@@ -251,60 +183,38 @@ as a last (and in this case only) <code>write()</code>.</p>
 
 <p>All told, this only saves us two method calls, but if every time you
 refactor it nets huge gains, maybe you don’t do it enough.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/">Hello World: A First Node App</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2011-10-18T15:02:00-04:00" pubdate>18 Oct 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As is traditional, we’re going to get started with a hello world app,
+  <entry>
+    <title type="html"><![CDATA[Hello world: a first node app]]></title>
+    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/"/>
+    <updated>2011-10-18T15:02:00-04:00</updated>
+    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app</id>
+    <content type="html"><![CDATA[<p>As is traditional, we’re going to get started with a hello world app,
 and we’re going to take it step-by-step.</p>
 
 <p>First, we create a no-op node app. (No-op, noop, and nop are short for
 no operation, which is an assembly-ish way of saying that this app
 doesn’t do anything.) The initial version of that file is:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/db26a14ea44241edccb3f46e08e2a2a7a39600e9/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/db26a14ea44241edccb3f46e08e2a2a7a39600e9/app.js'></script>
 <noscript><pre><code>(function() {
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>What you see here is a common construction for executing code without
 adding its constituent pieces to the global environment.</p>
 
 <p>Once we have that local scope create, we can start adding things to it:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/453f1645b44c652811d13c0b1a196a1c7b72f7a6/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/453f1645b44c652811d13c0b1a196a1c7b72f7a6/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>The <code>require()</code> function we’re using here is
 <a href="http://nodejs.org/docs/v0.4.12/api/all.html#require">built into Node.js</a>,
@@ -318,14 +228,14 @@ we’re storing into the <code>http</code> variable).</p>
 
 <p>The reason we need the <code>http</code> module is so that we can do this:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/013450c96caabba3abeafdbccd75ec9b85ea91eb/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/013450c96caabba3abeafdbccd75ec9b85ea91eb/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
   var app = http.createServer();
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>The object exported by the
 <a href="http://nodejs.org/docs/v0.4.12/api/all.html#hTTP"><code>http</code> module</a>
@@ -357,7 +267,7 @@ created?</p>
 anything; not even that we wanted it to accept connections. Let’s try
 telling it just that:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/55e7733b635d0fd04addfd6ad292f5f12043c6b9/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/55e7733b635d0fd04addfd6ad292f5f12043c6b9/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -365,7 +275,7 @@ telling it just that:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>Here we’ve instructed the server we created to listen on port 3080 of
 the machine that server is being run on. If you run <code>node app.js</code> now,
@@ -384,10 +294,10 @@ into that.</p>
 <p>If you look at the
 <a href="http://nodejs.org/docs/v0.4.12/api/all.html#http.createServer">API for the <code>http.createServer()</code></a>
 call we’re making, you’ll see that we can pass it a <code>requestListener</code>,
-which is “a function which is automatically added to the &#8216;request&#8217;
+which is “a function which is automatically added to the 'request'
 event.” That sounds just like what we’re looking for:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/dc8ad3b70bc79cd3b046f3aac7530907fbe661c1/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/dc8ad3b70bc79cd3b046f3aac7530907fbe661c1/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -397,7 +307,7 @@ event.” That sounds just like what we’re looking for:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>If you run this version of app.js, you’ll find that the behavior of
 our server hasn’t changed at all: it still never returns
@@ -413,7 +323,7 @@ each response.” Let’s put this to work for us by changing
 <code>say_nothing()</code>’s parameters to match <code>http.Server</code>’s <code>request</code> event
 and calling <code>end()</code> on the <code>ServerResponse</code> we just exposed:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/cc5158d5dbede2d368a043dbb5fd7616d7206cfd/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/cc5158d5dbede2d368a043dbb5fd7616d7206cfd/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -425,7 +335,7 @@ and calling <code>end()</code> on the <code>ServerResponse</code> we just expose
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>Once you have this app running, you can finally connect to it with
 your web browser at
@@ -458,7 +368,7 @@ or <a href="http://getfirebug.com/">Firebug</a> for Firefox.)</p>
 <p>The next crucial header we’re going to need to get our hello through
 properly is the content type:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/93ffcbff2abaa009fa281a02e0e18668d79e8537/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/93ffcbff2abaa009fa281a02e0e18668d79e8537/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -471,7 +381,7 @@ properly is the content type:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
+</p>
 
 <p>According to
 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616 §14.17</a>,
@@ -490,7 +400,7 @@ Transfer-Encoding: chunked
 <p>Now that we let the browser know what we’re sending, we’re ready to
 send that famous first message:</p>
 
-<div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/7bab5c62f53857fbfd6487e77eaaaf906c7c04e0/app.js'></script>
+<p><div><script src='http://gist-it.appspot.com/github/whittle/node-coffee-heroku-tutorial/raw/7bab5c62f53857fbfd6487e77eaaaf906c7c04e0/app.js'></script>
 <noscript><pre><code>(function() {
   var http = require('http');
 
@@ -506,91 +416,10 @@ send that famous first message:</p>
   app.listen(3080);
 })();
 </code></pre></noscript></div>
-
-
-<p>Fire up your node server and <a href="http://localhost:3080">check it out</a>!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/node-coffee-heroku-tutorial/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/">Headers and encodings: being a good web citizen</a>
-      </li>
-    
-      <li class="post">
-        <a href="/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/">Hello world: a first node app</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Jason Whittle -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
-</footer>
+<p>Fire up your node server and <a href="http://localhost:3080">check it out</a>!</p>
+]]></content>
+  </entry>
   
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

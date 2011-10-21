@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>
+            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/
+        </loc>
+        <lastmod>2011-10-20T19:35:46-04:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/
+        </loc>
+        <lastmod>2011-10-20T23:32:45-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://whittle.github.com/node-coffee-heroku-tutorial/blog/archives/</loc>
+        <lastmod>2011-10-20T23:32:45-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://whittle.github.com/node-coffee-heroku-tutorial/</loc>
+        <lastmod>2011-10-20T23:32:45-04:00</lastmod>
+    </url>
+</urlset>
