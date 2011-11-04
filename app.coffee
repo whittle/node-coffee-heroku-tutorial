@@ -1,6 +1,6 @@
 http = require 'http'
 
-# var sayHello = function(request, response) {
+sayHello = (request, response) ->
 #   var message = 'Hello, world!';
 #
 #   response.writeHead(200, {
