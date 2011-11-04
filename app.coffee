@@ -1,7 +1,7 @@
 http = require 'http'
 
 sayHello = (request, response) ->
-#   var message = 'Hello, world!';
+  message = 'Hello, world!'
 #
 #   response.writeHead(200, {
 #     'Content-Type': 'text/plain; charset=utf-8',
