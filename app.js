@@ -1,5 +1,5 @@
 (function() {
-  var http, sayHello;
+  var app, http, sayHello;
   http = require('http');
   sayHello = function(request, response) {
     var message;
@@ -10,4 +10,6 @@
     });
     return response.end(message, 'utf8');
   };
+  app = http.createServer(sayHello);
+  app.listen(3080);
 }).call(this);
