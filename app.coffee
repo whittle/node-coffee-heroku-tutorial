@@ -9,4 +9,4 @@ sayHello = (request, response) ->
   response.end message, 'utf8'
 
 app = http.createServer sayHello
-app.listen 3080
+app.listen process.env.PORT || 3080
