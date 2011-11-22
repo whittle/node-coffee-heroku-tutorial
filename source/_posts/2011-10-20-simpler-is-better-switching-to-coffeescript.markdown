@@ -19,7 +19,7 @@ First off, we’ll rename our one existing source file from `app.js` to
 
 You can see that instead of JavaScript’s C++ and C-style comments
 (`//` to the end of the line, and `/*` through `*/`, respectively),
-CoffeeScript uses Ruby-style comments: `#` to the end of the line.
+CoffeeScript uses shell-style comments: `#` to the end of the line.
 
 The next thing you might notice is that trying to run `app.coffee`
 through `node` causes a syntax error on the first line. Node doesn’t
