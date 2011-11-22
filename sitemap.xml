@@ -2,19 +2,19 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>
-            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/
+            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world/
         </loc>
         <lastmod>2011-10-20T19:35:46-04:00</lastmod>
     </url>
     <url>
         <loc>
-            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/
+            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings/
         </loc>
         <lastmod>2011-10-20T23:32:45-04:00</lastmod>
     </url>
     <url>
         <loc>
-            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better-switching-to-coffeescript/
+            http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better/
         </loc>
         <lastmod>2011-11-21T19:07:55-05:00</lastmod>
     </url>

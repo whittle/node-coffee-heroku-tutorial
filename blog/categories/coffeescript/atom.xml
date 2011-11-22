@@ -4,7 +4,7 @@
   <title><![CDATA[Category: coffeescript | Node && CoffeeScript && Heroku]]></title>
   <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/categories/coffeescript/atom.xml" rel="self"/>
   <link href="http://whittle.github.com/node-coffee-heroku-tutorial/"/>
-  <updated>2011-11-21T19:12:55-05:00</updated>
+  <updated>2011-11-21T19:17:15-05:00</updated>
   <id>http://whittle.github.com/node-coffee-heroku-tutorial/</id>
   <author>
     <name><![CDATA[Jason Whittle]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Simpler is better: switching to CoffeeScript]]></title>
-    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better-switching-to-coffeescript/"/>
+    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better/"/>
     <updated>2011-10-20T23:41:00-04:00</updated>
-    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better-switching-to-coffeescript</id>
+    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better</id>
     <content type="html"><![CDATA[<p>At the end of the last post, we refactored the request handler method
 just a little bit to make it shorter. In this post, we’re going to
 tighten things up just a little bit more by compiling

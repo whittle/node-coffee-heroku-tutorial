@@ -4,7 +4,7 @@
   <title><![CDATA[Category: node | Node && CoffeeScript && Heroku]]></title>
   <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/categories/node/atom.xml" rel="self"/>
   <link href="http://whittle.github.com/node-coffee-heroku-tutorial/"/>
-  <updated>2011-11-21T19:12:55-05:00</updated>
+  <updated>2011-11-21T19:17:15-05:00</updated>
   <id>http://whittle.github.com/node-coffee-heroku-tutorial/</id>
   <author>
     <name><![CDATA[Jason Whittle]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Headers and encodings: being a good web citizen]]></title>
-    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/"/>
+    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings/"/>
     <updated>2011-10-19T16:00:00-04:00</updated>
-    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen</id>
+    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings</id>
     <content type="html"><![CDATA[<p>So, in the last post we sent our very first message, but we’re not
 quite doing everything we should.</p>
 
@@ -188,9 +188,9 @@ refactor it nets huge gains, maybe you don’t do it enough.</p>
   
   <entry>
     <title type="html"><![CDATA[Hello world: a first node app]]></title>
-    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/"/>
+    <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world/"/>
     <updated>2011-10-18T15:02:00-04:00</updated>
-    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app</id>
+    <id>http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world</id>
     <content type="html"><![CDATA[<p>As is traditional, we’re going to get started with a hello world app,
 and we’re going to take it step-by-step.</p>
 
