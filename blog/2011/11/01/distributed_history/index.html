@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Distributed history: setting up a Git repo - Node && CoffeeScript && Heroku</title>
+  <meta name="author" content="Jason Whittle">
+
+  
+  <meta name="description" content="In order to use Heroku in the next post, we’re going to need to haveset up our project as a Git repository.Even if you’re not deploying to Heroku, ...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/11/01/distributed_history/">
+  <link href="/node-coffee-heroku-tutorial/favicon.png" rel="icon">
+  <link href="/node-coffee-heroku-tutorial/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/node-coffee-heroku-tutorial/javascripts/modernizr-2.0.js"></script>
+  <script src="/node-coffee-heroku-tutorial/javascripts/ender.js"></script>
+  <script src="/node-coffee-heroku-tutorial/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/node-coffee-heroku-tutorial/atom.xml" rel="alternate" title="Node && CoffeeScript && Heroku" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/node-coffee-heroku-tutorial/">Node && CoffeeScript && Heroku</a></h1>
+  
+    <h2>A (Mildly Obsessive) Tutorial</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/node-coffee-heroku-tutorial/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:whittle.github.com/node-coffee-heroku-tutorial" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/node-coffee-heroku-tutorial/">Blog</a></li>
+  <li><a href="/node-coffee-heroku-tutorial/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Distributed History: Setting Up a Git Repo</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2011-11-01T18:52:00-04:00" pubdate> 1 Nov 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In order to use Heroku in the next post, we’re going to need to have
+set up our project as a Git repository.</p>
+
+<p>Even if you’re not deploying to Heroku, it is critical to always have
+your source code checked into a
+<a href="http://en.wikipedia.org/wiki/Version_control">revision control</a>
+repository. Additionally, if you aren’t already using a
+<a href="http://en.wikipedia.org/wiki/Distributed_revision_control">distributed revision control</a>
+tool like <a href="http://git-scm.com/">Git</a>, you’re not getting the full
+advantage of revision control.</p>
+
+<p>If you’re already a Git devotee, you can set up a git repo now that
+just includes the <code>app.coffee</code> file we created in the last
+post. That’s it, you’re done!</p>
+
+<p>If you’re used to a different distributed revision control tool, good
+for you. We’re going to use Git in this tutorial because that’s the
+interface that Heroku exposes, but since all DVCSs that I’m aware of
+share the same basic underpinnings, you should be able to follow along
+easily with the step-by-step instructions one paragraph down.</p>
+
+<p>If you’re not familiar with distributed revision control, I would
+recommend that you put a hold on walking through this tutorial, and
+spend some time <a href="http://git-scm.com/documentation">learning Git</a>.
+Becoming intimately familiar with a distributed revision control tool
+like Git will pay enormous dividends to any developer in increased
+freedom and, ultimately, productivity. It’s okay—I’ll be here when
+you get back.</p>
+
+<p>If you haven’t yet installed Git on your machine, you should do so
+now. If you’re on a Mac and have
+<a href="http://mxcl.github.com/homebrew">Homebrew</a> installed, just
+<code>brew install git</code>. Likewise, Linux distros based on Debian can
+<code>apt-get install git</code>. Otherwise, check your package manager or the
+<a href="http://git-scm.com/download">Git downloads</a>.</p>
+
+<p>Git, like most revision control systems, works best if it has a
+directory to itself. Create a new directory now, and put the
+<code>app.coffee</code> file we’ve been working on inside of it.</p>
+
+<p>On the command line, <code>cd</code> into the directory you just created. Right
+now, it’s only content should be <code>app.coffee</code>. Now, while in the
+directory, run <code>git init</code>. This initializes the directory you’re in as
+a Git repo by creating a <code>.git</code> directory within the repo.</p>
+
+<p>If, at any time, you’d like more information about the various <code>git</code>
+subcommands, they each have their own manpage. Since most shells
+expect spaces to separate arguments, invoke <code>man</code> with a hyphen
+between git and the subcommand, e.g. <code>man git-init</code>.</p>
+
+<p>Currently, <code>app.coffee</code> is in the repo’s working tree, but hasn’t been
+committed yet. In order to commit the file, we first need to add it to
+the repo’s index. The command for adding things to the index is
+<code>git add</code>. In order to add just the one file, it’s as easy as
+<code>git add app.coffee</code>.</p>
+
+<p>If you’d like to prove to yourself that the last command actually did
+something, run <code>git status</code> now for a brief explanation of what’s
+going on with your repo.</p>
+
+<p>In the parlance of git, now that <code>app.coffee</code> has been added to the
+index, it is staged for commit. You can now run <code>git commit</code> to check
+it in. When you do so, an interactive editor will open, prompting you
+for a commit message. (You can customize which editor using
+<a href="http://book.git-scm.com/5_customizing_git.html"><code>git config</code></a>.)</p>
+
+<p>In non-distributed version control systems like CVS or Subversion, a
+commit represents the current state of the repository, and so commit
+messages are frequently written so that they describe the state the
+repo is at following the commit. In Git and other DVCSs, each commit
+is instead a set of diffs applied to parent commits. Because of that
+difference, it’s common practice to write commit messages so that they
+describe the effect of applying that commit. As such, an appropriate
+commit message here might be, “Add an HTTP server that returns a
+greeting.”</p>
+
+<p>Once you save the commit message and/or close your editor, your
+initial commit should be complete. You can see it as part of your
+history using
+<a href="http://book.git-scm.com/3_reviewing_history_-_git_log.html"><code>git log</code></a>.</p>
+
+<p>If you’d like to keep a copy of your brand new repository at
+<a href="https://github.com/">Github</a> or a similar service, now would be a
+good time to set up the <a href="http://gitref.org/remotes/">remotes</a> for it.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jason Whittle</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2011-11-01T18:52:00-04:00" pubdate> 1 Nov 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/node-coffee-heroku-tutorial/blog/categories/git/'>git</a>, <a class='category' href='/node-coffee-heroku-tutorial/blog/categories/heroku-/'>heroku,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/11/01/distributed_history/" data-via="" data-counturl="http://whittle.github.com/node-coffee-heroku-tutorial/blog/2011/11/01/distributed_history/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better-switching-to-coffeescript/" title="Previous Post: Simpler is better: switching to CoffeeScript">&laquo; Simpler is better: switching to CoffeeScript</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/node-coffee-heroku-tutorial/blog/2011/11/01/distributed_history/">Distributed history: setting up a Git repo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/node-coffee-heroku-tutorial/blog/2011/10/20/simpler-is-better-switching-to-coffeescript/">Simpler is better: switching to CoffeeScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/node-coffee-heroku-tutorial/blog/2011/10/19/headers-and-encodings-being-a-good-web-citizen/">Headers and encodings: being a good web citizen</a>
+      </li>
+    
+      <li class="post">
+        <a href="/node-coffee-heroku-tutorial/blog/2011/10/18/hello-world-a-first-node-app/">Hello world: a first node app</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Jason Whittle -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

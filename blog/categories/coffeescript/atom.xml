@@ -4,7 +4,7 @@
   <title><![CDATA[Category: coffeescript | Node && CoffeeScript && Heroku]]></title>
   <link href="http://whittle.github.com/node-coffee-heroku-tutorial/blog/categories/coffeescript/atom.xml" rel="self"/>
   <link href="http://whittle.github.com/node-coffee-heroku-tutorial/"/>
-  <updated>2011-11-08T13:48:21-05:00</updated>
+  <updated>2011-11-21T19:12:55-05:00</updated>
   <id>http://whittle.github.com/node-coffee-heroku-tutorial/</id>
   <author>
     <name><![CDATA[Jason Whittle]]></name>
@@ -48,7 +48,7 @@ JavaScript.</p>
 
 <p>You can see that instead of JavaScript’s C++ and C-style comments
 (<code>//</code> to the end of the line, and <code>/*</code> through <code>*/</code>, respectively),
-CoffeeScript uses Ruby-style comments: <code>#</code> to the end of the line.</p>
+CoffeeScript uses shell-style comments: <code>#</code> to the end of the line.</p>
 
 <p>The next thing you might notice is that trying to run <code>app.coffee</code>
 through <code>node</code> causes a syntax error on the first line. Node doesn’t
